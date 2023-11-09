@@ -1,16 +1,18 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/pyrolass/book-service/db"
+	"github.com/pyrolass/book-service/routes"
+)
 
 func main() {
 
 	server := gin.Default()
 
-	server.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	routes.InitializeRoutes(server)
+
+	db.Connect()
 
 	server.Run(":8081")
 }
