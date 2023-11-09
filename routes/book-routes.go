@@ -9,5 +9,7 @@ func BookRoutes(router *gin.Engine) {
 	bookGroup := router.Group("/")
 	{
 		bookGroup.POST("/create_book", controllers.CreateBook)
+		bookGroup.GET("/:id", controllers.GetBookById)
+
 	}
 }

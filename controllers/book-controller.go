@@ -26,3 +26,20 @@ func CreateBook(c *gin.Context) {
 
 	c.JSON(200, gin.H{"data": book})
 }
+
+func GetBookById(c *gin.Context) {
+
+	println("test")
+	id := c.Param("id")
+
+	var book models.Book
+
+	database := db.GetDB()
+
+	if result := database.First(&book, id); result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"data": book})
+}
